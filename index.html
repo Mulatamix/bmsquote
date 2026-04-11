@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMS Replacement Quote Intake</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">TechPro HVAC/R • Benfield Mechanical Services</p>
+        <h1>Replacement Equipment Quote Request</h1>
+        <p>
+          Use this form to request a quote for a new replacement unit. Share as much
+          information as you can about the existing equipment (including model tag
+          photos) so our team can verify fit and compatibility before pricing.
+        </p>
+      </div>
+      <aside class="pillars">
+        <h2>How this workflow works</h2>
+        <ol>
+          <li>Customer submits a guided intake in 7 short steps.</li>
+          <li>Technician verifies identity, fit, utilities, and replacement path.</li>
+          <li>Sales receives a validated, quote-ready package.</li>
+        </ol>
+      </aside>
+    </header>
+
+    <main>
+      <section class="stepper" aria-label="customer intake steps">
+        <button class="step is-active" data-step="1" type="button">1. Contact</button>
+        <button class="step" data-step="2" type="button">2. Equipment</button>
+        <button class="step" data-step="3" type="button">3. Existing Unit</button>
+        <button class="step" data-step="4" type="button">4. Utilities</button>
+        <button class="step" data-step="5" type="button">5. Photos</button>
+        <button class="step" data-step="6" type="button">6. Preferences</button>
+        <button class="step" data-step="7" type="button">7. Site & Submit</button>
+      </section>
+
+      <form id="quote-form" class="card" novalidate>
+        <div class="form-step is-active" data-step="1">
+          <h2>Contact Information</h2>
+          <div class="grid two-col">
+            <label>Full name* <input required name="fullName" autocomplete="name" /></label>
+            <label>Business name* <input required name="businessName" autocomplete="organization" /></label>
+            <label>Phone number <input name="phone" type="tel" autocomplete="tel" /></label>
+            <label>Email address <input type="email" name="email" autocomplete="email" /></label>
+            <label>Service address / installation location* <input required name="address" autocomplete="street-address" /></label>
+            <label>Best time to reach you <input name="reachTime" placeholder="Morning / Afternoon / Anytime" /></label>
+          </div>
+          <label>Preferred contact method
+            <select name="contactMethod">
+              <option>Phone</option>
+              <option>Email</option>
+              <option>Text</option>
+            </select>
+          </label>
+          <p class="helper">* Name, company, address, and at least one contact method (phone or email) are required.</p>
+        </div>
+
+        <div class="form-step" data-step="2">
+          <h2>Request Type & Equipment Category</h2>
+          <label>Request type*
+            <select name="requestType" required>
+              <option value="">Select one</option>
+              <option>I want to replace an existing unit</option>
+            </select>
+          </label>
+          <label>Urgency
+            <select name="urgency">
+              <option>Just pricing</option>
+              <option>Need quote soon</option>
+              <option>Unit down / urgent replacement</option>
+              <option>Planning / budgeting</option>
+            </select>
+          </label>
+          <label>What type of unit are you replacing?*
+            <select id="equipmentType" name="equipmentType" required>
+              <option value="">Select category</option>
+              <option>Reach-in refrigerator</option>
+              <option>Reach-in freezer</option>
+              <option>Undercounter refrigerator</option>
+              <option>Undercounter freezer</option>
+              <option>Prep table</option>
+              <option>Back bar cooler</option>
+              <option>Worktop refrigerator/freezer</option>
+              <option>Ice machine</option>
+              <option>Condensing unit</option>
+              <option>Evaporator</option>
+              <option>Walk-in cooler unit</option>
+              <option>Walk-in freezer unit</option>
+              <option>HVAC equipment</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <div id="dynamic-questions" class="dynamic-questions" aria-live="polite">
+            <strong>Smart follow-up prompts:</strong>
+            <ul><li>Select an equipment type to see recommended questions.</li></ul>
+          </div>
+        </div>
+
+        <div class="form-step" data-step="3">
+          <h2>Existing Unit Information</h2>
+          <div class="grid two-col">
+            <label>Brand / manufacturer <input name="brand" /></label>
+            <label>Model number <input name="model" /></label>
+            <label>Serial number <input name="serial" /></label>
+            <label>Approximate age of unit <input name="age" placeholder="e.g., 8 years" /></label>
+            <label>Number of doors / drawers / lids <input name="doors" /></label>
+            <label>Application area
+              <select name="applicationArea">
+                <option>Indoor</option>
+                <option>Outdoor</option>
+                <option>Hot kitchen line</option>
+                <option>Bar area</option>
+                <option>Bakery / prep area</option>
+                <option>Walk-in box</option>
+                <option>Other</option>
+              </select>
+            </label>
+          </div>
+          <label>Is the existing unit still operating?*
+            <select name="operatingStatus" required>
+              <option value="">Select one</option>
+              <option>Yes</option>
+              <option>No</option>
+              <option>Intermittent</option>
+            </select>
+          </label>
+          <label>Main reason for replacement*
+            <select name="reason" required>
+              <option value="">Select one</option>
+              <option>Old unit</option>
+              <option>Unit failed</option>
+              <option>Frequent breakdowns</option>
+              <option>Not cooling properly</option>
+              <option>Upgrade / remodel</option>
+              <option>Need a different size/capacity</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <div class="grid three-col">
+            <label>Width (in.) <input name="width" /></label>
+            <label>Depth (in.) <input name="depth" /></label>
+            <label>Height (in.) <input name="height" /></label>
+          </div>
+          <label>Does replacement need to fit exact same space?*
+            <select name="exactFit" required>
+              <option value="">Select one</option>
+              <option>Yes</option>
+              <option>No</option>
+              <option>Not sure</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="form-step" data-step="4">
+          <h2>Utility / Power Information (if known)</h2>
+          <div class="grid two-col">
+            <label>Voltage <input name="voltage" placeholder="e.g., 208/230" /></label>
+            <label>Phase <input name="phase" placeholder="e.g., 1PH / 3PH" /></label>
+            <label>Plug type <input name="plugType" placeholder="e.g., NEMA 5-15P" /></label>
+            <label>Refrigerant type <input name="refrigerant" placeholder="e.g., R-290" /></label>
+          </div>
+          <label>Existing disconnect / outlet present?
+            <select name="disconnect">
+              <option>Yes</option>
+              <option>No</option>
+              <option>Not sure</option>
+            </select>
+          </label>
+          <p class="helper">If unsure, upload clear electrical/data plate photos in the next step.</p>
+        </div>
+
+        <div class="form-step" data-step="5">
+          <h2>Photo Uploads</h2>
+          <p>At least one photo is required. Multiple photos significantly improve quote accuracy.</p>
+          <label>Upload photos* <input type="file" name="photos" id="photos" accept="image/*" multiple required /></label>
+          <ul class="upload-guide">
+            <li>Front photo of the existing unit</li>
+            <li>Model / serial tag photo</li>
+            <li>Side view and interior photo</li>
+            <li>Electrical / data plate photo</li>
+            <li>Area around install location and connection points</li>
+          </ul>
+        </div>
+
+        <div class="form-step" data-step="6">
+          <h2>Replacement Preferences</h2>
+          <label>Preferred replacement goal*
+            <select name="goal" required>
+              <option value="">Select one</option>
+              <option>Same brand if possible</option>
+              <option>Equivalent replacement</option>
+              <option>Best value option</option>
+              <option>Premium / long-warranty option</option>
+              <option>Not sure, recommend one</option>
+            </select>
+          </label>
+          <div class="grid two-col">
+            <label>Preferred brands <input name="preferredBrands" /></label>
+            <label>Brands to avoid <input name="avoidBrands" /></label>
+            <label>Need stainless exterior?
+              <select name="stainless"><option>No preference</option><option>Yes</option><option>No</option></select>
+            </label>
+            <label>Need exact door configuration match?
+              <select name="doorMatch"><option>No preference</option><option>Yes</option><option>No</option></select>
+            </label>
+            <label>Need casters / legs / shelves / accessories?
+              <input name="accessories" placeholder="List any required accessories" />
+            </label>
+            <label>Budget range (optional) <input name="budget" placeholder="$" /></label>
+          </div>
+        </div>
+
+        <div class="form-step" data-step="7">
+          <h2>Site / Delivery / Access + Submit</h2>
+          <div class="grid two-col">
+            <label>Ground-floor install?
+              <select name="groundFloor"><option>Yes</option><option>No</option><option>Not sure</option></select>
+            </label>
+            <label>Stairs involved?
+              <select name="stairs"><option>No</option><option>Yes</option><option>Not sure</option></select>
+            </label>
+            <label>Narrow doorway?
+              <select name="doorway"><option>No</option><option>Yes</option><option>Not sure</option></select>
+            </label>
+            <label>Elevator needed?
+              <select name="elevator"><option>No</option><option>Yes</option><option>Not sure</option></select>
+            </label>
+            <label>Existing unit removal needed?
+              <select name="removal"><option>Yes</option><option>No</option><option>Not sure</option></select>
+            </label>
+            <label>Old unit already disconnected?
+              <select name="disconnected"><option>Yes</option><option>No</option><option>Not sure</option></select>
+            </label>
+          </div>
+          <label>Delivery restrictions / install window
+            <textarea name="deliveryNotes" rows="3"></textarea>
+          </label>
+          <label>Final notes: anything else we should know?
+            <textarea name="notes" rows="4"></textarea>
+          </label>
+          <div class="notice">
+            Phase 1 focus: replacement quote intake only (not repair diagnostics).
+          </div>
+        </div>
+
+        <p id="form-error" class="error hidden" role="alert"></p>
+
+        <div class="controls">
+          <button type="button" id="prevBtn" class="secondary">Back</button>
+          <button type="button" id="nextBtn">Next</button>
+          <button type="submit" id="submitBtn" class="hidden">Submit Request</button>
+        </div>
+      </form>
+
+      <div id="confirmation" class="card confirmation hidden" role="status" aria-live="polite">
+        <h3>Request submitted</h3>
+        <p>
+          Thank you. Your replacement quote request has been submitted. Our team will
+          review the equipment details and photos, verify replacement fit and utility
+          compatibility, and contact you if additional information is needed before
+          preparing your quote.
+        </p>
+      </div>
+
+      <section class="internal-access card">
+        <h2>Internal Technician Verification</h2>
+        <p>This section is for internal users only.</p>
+        <button id="toggleInternalBtn" type="button" class="secondary">Show Internal Checklist</button>
+      </section>
+
+      <section class="card hidden" id="technician-panel">
+        <h2>Technician Verification Checklist (Internal)</h2>
+        <div class="checklist-grid">
+          <article>
+            <h3>A. Lead Qualification</h3>
+            <ul>
+              <li>Replacement-only request confirmed (not repair)</li>
+              <li>Customer within service area</li>
+              <li>Category and photos sufficient</li>
+              <li>Model/serial readable</li>
+              <li>Follow-up needed before quote? (Yes / No)</li>
+            </ul>
+          </article>
+          <article>
+            <h3>B. Existing Asset Verification</h3>
+            <ul>
+              <li>Manufacturer, model, serial validated</li>
+              <li>Unit type and capacity verified from tag/manual</li>
+              <li>Dimensions and electrical requirements confirmed</li>
+              <li>Refrigerant/system type verified</li>
+              <li>Installation environment confirmed</li>
+            </ul>
+          </article>
+          <article>
+            <h3>C. Replacement Logic</h3>
+            <ul>
+              <li>Direct replacement available?</li>
+              <li>Footprint / clearance / door-swing constraints</li>
+              <li>Utility compatibility and code considerations</li>
+              <li>Performance needs and upsizing review</li>
+            </ul>
+          </article>
+          <article>
+            <h3>D. Quoting Path</h3>
+            <ul>
+              <li>Like-for-like replacement</li>
+              <li>Equivalent alternate</li>
+              <li>Upgrade replacement</li>
+              <li>Discontinued model replacement</li>
+              <li>Custom review required</li>
+            </ul>
+          </article>
+          <article>
+            <h3>E. Internal Quote Notes</h3>
+            <ul>
+              <li>Recommended + alternate models</li>
+              <li>Warranty and lead-time notes</li>
+              <li>Accessories and install considerations</li>
+              <li>Removal/disposal and exclusions</li>
+              <li>Additional field visit required?</li>
+            </ul>
+          </article>
+          <article>
+            <h3>F. Pricing / Sales Readiness</h3>
+            <ul>
+              <li>Equipment cost available</li>
+              <li>Freight/delivery included</li>
+              <li>Labor/startup scope confirmed</li>
+              <li>Tax status known</li>
+              <li>Ready for sales release</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
