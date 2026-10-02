@@ -114,11 +114,24 @@ function validateCurrentStep() {
   return true;
 }
 
+// Validate every prerequisite, revealing the first incomplete step on failure.
+function validateThrough(lastStep) {
+  for (let step = 1; step <= lastStep; step += 1) {
+    setStep(step);
+
+    if (!validateCurrentStep()) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 stepButtons.forEach((button) => {
   button.addEventListener('click', () => {
     const target = Number(button.dataset.step);
 
-    if (target <= currentStep || validateCurrentStep()) {
+    if (target <= currentStep || validateThrough(target - 1)) {
       setStep(target);
     }
   });
@@ -127,8 +140,10 @@ stepButtons.forEach((button) => {
 prevBtn.addEventListener('click', () => setStep(currentStep - 1));
 
 nextBtn.addEventListener('click', () => {
-  if (validateCurrentStep()) {
-    setStep(currentStep + 1);
+  const target = currentStep + 1;
+
+  if (validateThrough(currentStep)) {
+    setStep(target);
   }
 });
 
@@ -151,7 +166,7 @@ toggleInternalBtn.addEventListener('click', () => {
 quoteForm.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  if (!validateCurrentStep()) {
+  if (!validateThrough(steps.length)) {
     return;
   }
 
